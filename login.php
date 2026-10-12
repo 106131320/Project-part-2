@@ -35,7 +35,7 @@ $conn->close();}
 
 <body id="login">
     <div class="login-container">
-        <h2>HR Login</h2>
+        <h2>Admin Login</h2>
 
         <?php if (!empty($message)): ?>
             <div class="success-message"><?= $message ?></div>
