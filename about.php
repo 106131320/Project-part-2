@@ -35,9 +35,9 @@
         </a>
       </li>
       <li><a href="./">Home</a></li>
-      <li><a href="./jobs.html">Available Jobs</a></li>
-     <li><a href="./apply.html">Application Form</a></li>
-     <li><a href="./about.html">About Us</a></li>
+      <li><a href="./jobs.php">Available Jobs</a></li>
+     <li><a href="./apply.php">Application Form</a></li>
+     <li><a href="./about.php">About Us</a></li>
     </ul>
   </nav>
   </header>
