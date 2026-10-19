@@ -1,37 +1,23 @@
 <?php
-  session_start()
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<!--- meta elements -->
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="Job Description for available roles at Cyber Snug">
-  <meta name="keywords" content="Cyber Snug, careers, cyber security engineer, cyber security architect, cyber security assurance analyst, digital forensics examiner, job description">
-  <meta name="author" content="html wizards">
-  <title>Position Description</title>
-  <link rel="stylesheet" href="./styles/styles.css" type="text/css">
-<!--- added the link to stylesheet -->
-
-<!--- embedded CSS -->
-
+session_start();
+$page_title = 'Position Description';
+$page_description = 'Job Description for available roles at Cyber Snug';
+$page_keywords = 'Cyber Snug, careers, cyber security engineer, cyber security architect, cyber security assurance analyst, digital forensics examiner, job description';
+$body_id = 'jobs_page';
+$extra_head = '
+  <!-- Embedded CSS  -->
+  <!--Gives h1 and h2 a light purple outline effect using text-stroke-->
   <style>
-  h2 {
-    -webkit-text-stroke: 1px #AEAFFF;
-    color: black;
-  }
-  </style>
+    h2 {
+        -webkit-text-stroke: 1px #AEAFFF;
+        color: black;
+    }
+  </style>';
 
-</head>
-
-<body id="jobs_page">
-  <?php 
-  $pageTitle = "Position Description";
-  include 'nav.inc'; 
-  include 'header.inc';
-  ?>
+// shared layout: <head>, then site header/navigation
+require_once 'header.inc';
+require_once 'nav.inc';
+?>
 
   <main class="jobs_main">
     <?php
@@ -130,7 +116,5 @@
     ?>
   </main>
 
-  <?php include 'footer.inc'; ?>
-</body>
+<?php require_once 'footer.inc'; ?>
 
-</html>

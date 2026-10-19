@@ -1,56 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!--- meta elements -->
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="About Cyber Snug team">
-  <meta name="keywords" content="Cyber Snug, about us, our team, meet the team">
-  <meta name="author" content="html wizards">
-  <title>About Us</title>
-  <link rel="stylesheet" href="./styles/styles.css" type="text/css">
-<!--- added the link to stylesheet -->
-
-<!--- embedded CSS -->
-<!--Gives h1 and h2 a light purple outline effect using text-stroke-->
+<?php
+$page_title = 'About Us';
+$page_description = 'About Cyber Snug team';
+$page_keywords = 'Cyber Snug, about us, our team, meet the team';
+$extra_head = '
+  <!-- Embedded CSS  -->
+  <!--Gives h1 and h2 a light purple outline effect using text-stroke-->
   <style>
     h1 , h2 {
         -webkit-text-stroke: 1px #AEAFFF;
       color: black;
     }
-  </style>
-
-</head>
-
-<body>
-
-  <header>
-  <!--- added links to each page -->
-  <!--main site navigation & logo lightbox popup feature-->
-  <nav>
-    <ul>
-      <li>
-        <a href="#logo-lightbox">
-        <img id="logo" src="images/Cyber_Snug_FINAL.png" alt="Company Logo">
-        </a>
-      </li>
-      <li><a href="./">Home</a></li>
-      <li><a href="./jobs.php">Available Jobs</a></li>
-     <li><a href="./apply.php">Application Form</a></li>
-     <li><a href="./about.php">About Us</a></li>
-    </ul>
-  </nav>
-  </header>
-
-  <!--Hidden lightbox that displays enlarged version of logo when nav logo link is clicked-->
-  <div class="lightbox" id="logo-lightbox">
-    <a href="#" aria-label="Close">
-      <span style="background-image: url('images/Cyber_Snug_FINAL.png');"></span>
-    </a>
-  </div>
+  </style>';
+ 
+// shared layout: <head>, then site header/navigation
+require_once 'header.inc';
+require_once 'nav.inc';
+?>
 
   <main class="main">
-
     <h1>Meet the Cyber Snug Team</h1>
     <p> We call ourselves the <strong>HTML WIZARDS</strong> and we are behind the static recruitment website for the Cyber Security company <strong>Cyber Snug</strong></p>
     <h2>Meet the Team!</h2>
@@ -174,18 +141,5 @@
       </tr>
     </table>
   </main>
-
-  <footer>
-<!---site footer with links to Github repo, Jira Board and contact email-->
-    <p ><a href="https://github.com/106131320/Project-part-1" target="_blank">Cyber Snug's Github Page!</a></p>
-    <p ><a href="https://snugcyber.atlassian.net?continue=https%3A%2F%2Fsnugcyber.atlassian.net%2Fwelcome%2Fsoftware&atlOrigin=eyJpIjoiZGUwYWVmOGFkY2FlNDNkOGJjMmJmNWQ0NGI5NGQwYzEiLCJwIjoiaiJ9" 
-    target="_blank">Cyber Snug's Jira portfolio </a></p>
-    <p ><a href="mailto:snugcyber@gmail.com" target="_blank">snugcyber@gmail.com</a></p>
-  </footer>
-
   
-</body>
-
-
-
-</html>
+<?php require_once 'footer.inc'; ?>
