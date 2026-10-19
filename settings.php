@@ -1,17 +1,17 @@
 <?php
 // Database credentials for local server
-define('DB_HOST', 'localhost'); 
-define('DB_USER', 'root'); // These credentials are simply for accenessing the pages, they do not need a password. These are not the credentials used to log in. 
-define('DB_PASSWORD', '');
-define('DB_NAME', 'database');
+$host = "localhost"
+$user = "root"; // These credentials are simply for accenessing the pages, they do not need a password. These are not the credentials used to log in. 
+$pwd = "";
+$sql_db = "database";
 
 // Establish database connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+mysqli_report(MYSQLI_REPORT_OFF);
+$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-
+if (!$conn) {
+    error_log("DB connection failed (" . mysqli_connect_errno() . "): " . mysqli_connect_error());
+    die("<p>Unable to connect to the db. Please try again later.</p>");
 }
 ?>
