@@ -40,10 +40,10 @@ require_once 'nav.inc';
                 }
                 ?>
                 
-                <section id="job<?php echo $job_count; ?>" class="job_card">
+                <section id="job<?php echo $job_count; ?>" class="jobs_main">
                     <h2>Position <?php echo $job_count; ?>: <?php echo $row['job_title']; ?></h2>
                     
-                    <div class="job_detail">
+                    <div class="job_description">
                         <p><strong>Reference Number:</strong> <?php echo $row['job_reference_number']; ?></p>
                         <p><strong>Salary:</strong> <?php echo $row['salary_range']; ?></p>
                         <p><strong>Reporting Line:</strong> <?php echo $row['reporting_line']; ?></p>
