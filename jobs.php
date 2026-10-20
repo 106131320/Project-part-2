@@ -4,7 +4,7 @@ $page_title = 'Position Description';
 $page_description = 'Job Description for available roles at Cyber Snug';
 $page_keywords = 'Cyber Snug, careers, cyber security engineer, cyber security architect, cyber security assurance analyst, digital forensics examiner, job description';
 $body_id = 'jobs_page';
-$extra_head = '
+$extra_css = '
   <!-- Embedded CSS  -->
   <!--Gives h1 and h2 a light purple outline effect using text-stroke-->
   <style>

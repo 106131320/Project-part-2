@@ -2,7 +2,7 @@
 $page_title = 'Homepage';
 $page_description = 'Cyber Snug homepage';
 $page_keywords = 'Cyber Snug, homepage, introduction';
-$extra_head = '
+$extra_css = '
   <!-- Embedded CSS  -->
   <!--sets font sizes for h3 and h1 inside .title block-->
   <style>
