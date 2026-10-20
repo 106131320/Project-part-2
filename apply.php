@@ -2,7 +2,7 @@
 $page_title = 'Job Application';
 $page_description = 'Application form for Cyber Snug';
 $page_keywords = 'Cyber Snug, application form, application, apply';
-$extra_head = '
+$extra_css = '
   <!-- Embedded CSS  -->
   <!--style the fieldset legends-->
   <style>

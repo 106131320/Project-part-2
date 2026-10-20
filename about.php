@@ -2,7 +2,7 @@
 $page_title = 'About Us';
 $page_description = 'About Cyber Snug team';
 $page_keywords = 'Cyber Snug, about us, our team, meet the team';
-$extra_head = '
+$extra_css = '
   <!-- Embedded CSS  -->
   <!--Gives h1 and h2 a light purple outline effect using text-stroke-->
   <style>
