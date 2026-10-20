@@ -2,8 +2,7 @@
 
 link to live pages 
 
-https://106131320.github.io/Project-part-1/
-
+](https://106131320.github.io/Project-part-2/)
 
 # Username and Password
 The username is 'admin' and the password for the login.php page is '$admin!'. 
