@@ -125,12 +125,12 @@ require_once 'nav.inc';
      <dd><em><?php echo htmlspecialchars($member['quote_translation']); ?></em></dd>
      <dd>
        <ul>
-<?php   foreach ($projects as $project) {
+<?php foreach ($projects as $project) {
             $project_id = $project['project_id'];
             if (isset($contributions[$member_id][$project_id])) { ?>
          <li><strong><?php echo htmlspecialchars($project['project_name'] . ': ' . $project['project_summary']); ?></strong>
            <ol>
-<?php           foreach ($contributions[$member_id][$project_id] as $description) { ?>
+<?php foreach ($contributions[$member_id][$project_id] as $description) { ?>
              <li><?php echo htmlspecialchars($description); ?></li>
 <?php           } ?>
            </ol>

@@ -1,6 +1,7 @@
 <header>
   <!--- added links to each page -->
   <!--main site navigation, including logo with lightbox popup-->
+  <!-- used example from https://www.w3schools.com/howto/howto_js_lightbox.asp to create lightbox feature>
   <nav>
     <ul>
       <li>
