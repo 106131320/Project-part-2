@@ -22,8 +22,8 @@ if (!isset($page_keywords)) {
   <link rel="stylesheet" href="./styles/styles.css" type="text/css">
 <?php
 // page-specific embedded CSS
-if (!empty($extra_head)) {
-    echo $extra_head;
+if (!empty($extra_css)) {
+    echo $extra_css;
 }
 ?>
 </head>
