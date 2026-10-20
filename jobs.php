@@ -26,25 +26,25 @@ require_once 'nav.inc';
     
     if ($conn) { //check for succcessful connection
         $query = "SELECT * FROM jobs ORDER BY job_id"; // fetch jobs from db
-        $result = mysqli_query($conn, $query);
+        $result = mysqli_query($conn, $query); //execute query on given connection
         
         if ($result && mysqli_num_rows($result) > 0) {
             echo "<!-- Jobs loaded from db -->";
             
-            $job_count = 0;
+            $job_count = 0; //initialize job counter
             while ($row = mysqli_fetch_assoc($result)) {
-                $job_count++;
+                $job_count++; // increase job count whenever loop runs
                 
                 if ($job_count > 1) {
-                    echo '<div class="job_divider"></div>';
+                    echo '<div class="job_divider"></div>'; // adds divider between each job descriptions
                 }
                 ?>
                 
-                <section id="job<?php echo $job_count; ?>" class="jobs_main">
+                <section id="job<?php echo $job_count; ?>" class="jobs_main"> <!-- create sections for each job and apply css class for styles -->
                     <h2>Position <?php echo $job_count; ?>: <?php echo $row['job_title']; ?></h2>
                     
-                    <div class="job_description">
-                        <p><strong>Reference Number:</strong> <?php echo $row['job_reference_number']; ?></p>
+                    <div class="job_description"> <!-- div container to group job info together and apply css class for styles -->
+                        <p><strong>Reference Number:</strong> <?php echo $row['job_reference_number']; ?></p> <!-- retrieves job desc from db & display onto webpage -->
                         <p><strong>Salary:</strong> <?php echo $row['salary_range']; ?></p>
                         <p><strong>Reporting Line:</strong> <?php echo $row['reporting_line']; ?></p>
                     </div>
@@ -55,10 +55,10 @@ require_once 'nav.inc';
                     <h3>Key Responsibilities</h3>
                     <ul>
                         <?php
-                        $responsibilities = explode(';', $row['key_responsibilities']);
-                        foreach ($responsibilities as $responsibility) {
-                            if (trim($responsibility)) {
-                                echo '<li>' . trim($responsibility) . '</li>';
+                        $responsibilities = explode(';', $row['key_responsibilities']); //splits text whenever semicolon is detected
+                        foreach ($responsibilities as $responsibility) { //loops through array
+                            if (trim($responsibility)) { //removes whitespaces from beginning & end of string
+                                echo '<li>' . trim($responsibility) . '</li>'; //display each as a bullet point
                             }
                         }
                         ?>
@@ -97,7 +97,7 @@ require_once 'nav.inc';
                 <?php
             }
             
-            mysqli_free_result($result);
+            mysqli_free_result($result); // free the memory associated db
         } else {
             // if no jobs found in db
             echo '<div class="error-message">';
@@ -105,7 +105,7 @@ require_once 'nav.inc';
             echo '</div>';
         }
         
-        mysqli_close($conn);
+        mysqli_close($conn); //close db connection
     } else {
         // failed db connection
         echo '<div class="error-message">';
