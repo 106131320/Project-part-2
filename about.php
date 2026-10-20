@@ -1,191 +1,173 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!--- meta elements -->
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="About Cyber Snug team">
-  <meta name="keywords" content="Cyber Snug, about us, our team, meet the team">
-  <meta name="author" content="html wizards">
-  <title>About Us</title>
-  <link rel="stylesheet" href="./styles/styles.css" type="text/css">
-<!--- added the link to stylesheet -->
-
-<!--- embedded CSS -->
-<!--Gives h1 and h2 a light purple outline effect using text-stroke-->
+<?php
+$page_title = 'About Us';
+$page_description = 'About Cyber Snug team';
+$page_keywords = 'Cyber Snug, about us, our team, meet the team';
+$extra_head = '
+  <!-- Embedded CSS  -->
+  <!--Gives h1 and h2 a light purple outline effect using text-stroke-->
   <style>
     h1 , h2 {
         -webkit-text-stroke: 1px #AEAFFF;
       color: black;
     }
-  </style>
-
-</head>
-
-<body>
-
-  <header>
-  <!--- added links to each page -->
-  <!--main site navigation & logo lightbox popup feature-->
-  <nav>
-    <ul>
-      <li>
-        <a href="#logo-lightbox">
-        <img id="logo" src="images/Cyber_Snug_FINAL.png" alt="Company Logo">
-        </a>
-      </li>
-      <li><a href="./">Home</a></li>
-      <li><a href="./jobs.php">Available Jobs</a></li>
-     <li><a href="./apply.php">Application Form</a></li>
-     <li><a href="./about.php">About Us</a></li>
-    </ul>
-  </nav>
-  </header>
-
-  <!--Hidden lightbox that displays enlarged version of logo when nav logo link is clicked-->
-  <div class="lightbox" id="logo-lightbox">
-    <a href="#" aria-label="Close">
-      <span style="background-image: url('images/Cyber_Snug_FINAL.png');"></span>
-    </a>
-  </div>
+  </style>';
+require_once 'settings.php';   // database connection: $conn
+ 
+// Run a SELECT query and return every row as an array.
+// Returns false if the query fails
+function get_rows($conn, $query)
+{
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        return false;
+    }
+    $rows = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    mysqli_free_result($result);
+    return $rows;
+}
+ 
+$team = false;               // one row: group details
+$members = array();          // team members, in display order
+$projects = array();         // Project Part 1, Project Part 2
+$contributions = array();    // $contributions[member_id][project_id][] = description
+$facts = array();            // $facts[member_id][] = fun fact
+$max_facts = 0;              // most fun facts any member has (table columns)
+$name_list = '';             // "Allegra, Freshta, Zoe and An"
+ 
+if ($conn) {
+    // names and quotes
+    mysqli_set_charset($conn, 'utf8mb4');
+ 
+    $rows = get_rows($conn, "SELECT * FROM team_info ORDER BY team_id LIMIT 1");
+    if ($rows) {
+        $team = $rows[0];
+        $team_id = (int) $team['team_id'];
+ 
+        $rows = get_rows($conn, "SELECT member_id, full_name, preferred_name, quote_original, quote_translation
+                                 FROM team_members WHERE team_id = $team_id ORDER BY display_order");
+        if ($rows) {
+            $members = $rows;
+        }
+ 
+        $rows = get_rows($conn, "SELECT project_id, project_name, project_summary FROM projects ORDER BY project_id");
+        if ($rows) {
+            $projects = $rows;
+        }
+ 
+        $rows = get_rows($conn, "SELECT member_id, project_id, description FROM member_contributions
+                                 ORDER BY member_id, project_id, display_order");
+        if ($rows) {
+            foreach ($rows as $row) {
+                $contributions[$row['member_id']][$row['project_id']][] = $row['description'];
+            }
+        }
+ 
+        $rows = get_rows($conn, "SELECT member_id, fact_text FROM member_fun_facts ORDER BY member_id, display_order");
+        if ($rows) {
+            foreach ($rows as $row) {
+                $facts[$row['member_id']][] = $row['fact_text'];
+            }
+        }
+    }
+    mysqli_close($conn);
+ 
+    // build the figure caption and the number of fun fact columns
+    $names = array();
+    foreach ($members as $member) {
+        $names[] = $member['preferred_name'];
+        if (isset($facts[$member['member_id']])) {
+            $max_facts = max($max_facts, count($facts[$member['member_id']]));
+        }
+    }
+    if (count($names) > 1) {
+        $last_name = array_pop($names);
+        $name_list = implode(', ', $names) . ' and ' . $last_name;
+    } else {
+        $name_list = implode('', $names);
+    }
+}
+// shared layout: <head>, then site header/navigation
+require_once 'header.inc';
+require_once 'nav.inc';
+?>
 
   <main class="main">
-
-    <h1>Meet the Cyber Snug Team</h1>
-    <p> We call ourselves the <strong>HTML WIZARDS</strong> and we are behind the static recruitment website for the Cyber Security company <strong>Cyber Snug</strong></p>
+ 
+<?php if ($team && $members) { ?>
+    <h1>Meet the <?php echo htmlspecialchars($team['company_name']); ?> Team</h1>
+    <p> We call ourselves the <strong><?php echo htmlspecialchars($team['team_name']); ?></strong> and we are behind the recruitment website for the Cyber Security company <strong><?php echo htmlspecialchars($team['company_name']); ?></strong></p>
     <h2>Meet the Team!</h2>
     <!--Nested list-->
       <ul>
       <li>Group Details
         <ul>
-          <li>Group Number: 01</li>
-          <li>Tutorial Class: Tuesday, 12:30pm</li>
+          <li>Group Number: <?php echo htmlspecialchars($team['group_number']); ?></li>
+          <li>Tutorial Class: <?php echo htmlspecialchars($team['tutorial_class']); ?></li>
         </ul>
       </li>
       </ul>
     <!--combined group photo, compressed file to 283KB-->
    <figure class="group-photo">
-      <img src="images/Combined_Group_Photo.png" alt="The HTML Wizards team group photo" width="2201" height="636">
-      <figcaption><em>Current Team Members: Allegra, Freshta, Zoe and An</em></figcaption>
+      <img src="<?php echo htmlspecialchars($team['group_photo']); ?>" alt="<?php echo htmlspecialchars($team['group_photo_alt']); ?>" width="2201" height="636">
+      <figcaption><em>Current Team Members: <?php echo htmlspecialchars($name_list); ?></em></figcaption>
     </figure>
-
-    <!--grid of team member profiles: name, quote and contribution list-->
+ 
+    <!--grid of team member profiles: name, quote and contributions for each project (from the database)-->
       <div class="team-grid">
+<?php foreach ($members as $member) {
+        $member_id = $member['member_id']; ?>
    <dl class="team-member">
-     <dt>Allegra Masri</dt>
-      <dd>Puedo terminar el trabajo más rápido que peluquear un calvo.</dd>
-      <dd><em>I finish work faster than giving a haircut to a bald guy</em></dd>
-      <dd>
+     <dt><?php echo htmlspecialchars($member['full_name']); ?></dt>
+     <dd><?php echo htmlspecialchars($member['quote_original']); ?></dd>
+     <dd><em><?php echo htmlspecialchars($member['quote_translation']); ?></em></dd>
+     <dd>
        <ul>
-          <li><strong>Contribution</strong>
-            <ol>
-              <li>Wrote HTML code for job descriptions of Cyber Security Engineer and Architect</li>
-             <li>Wrote nested list structure and table for about.html page</li>
-             <li>Wrote CSS code for about.html page</li>
-             <li>Wrote HTML and CSS code for lightbox logo feature</li>
-             <li>Validated my HTML and CSS and corrected any warnings and errors</li>
+<?php   foreach ($projects as $project) {
+            $project_id = $project['project_id'];
+            if (isset($contributions[$member_id][$project_id])) { ?>
+         <li><strong><?php echo htmlspecialchars($project['project_name'] . ': ' . $project['project_summary']); ?></strong>
+           <ol>
+<?php           foreach ($contributions[$member_id][$project_id] as $description) { ?>
+             <li><?php echo htmlspecialchars($description); ?></li>
+<?php           } ?>
            </ol>
          </li>
-       </ul>
-      </dd>
-    </dl>
-   <dl class="team-member">
-     <dt>Freshta Ahmadi</dt>
-     <dd>خار د جان خودخو ده، سيزو د جان ديگا</dd>  
-      <dd><em>Thrust a thorn into your own body, and a needle into someone else's. (Do to others as you would do to yourself)</em></dd>
-      <dd>
-       <ul>
-         <li><strong>Contribution</strong>
-            <ol>
-             <li>Wrote HTML code for job application form</li>
-             <li>Wrote HTML code and CSS for index.html page</li>
-             <li>Wrote table demonstrating cell merging for index.html page</li>
-             <li>Validated my HTML and CSS and corrected any warnings and errors</li>
-           </ol>
-         </li>
+<?php       }
+        } ?>
        </ul>
      </dd>
    </dl>
-    <dl class="team-member">
-     <dt>Zoe Ballantyne</dt>
-     <dd>Mən yalnız ingiliscə bilirəm; ümid edirəm ki, tərcümə yaxşı alınıb.</dd>  
-     <dd><em>i only know english, i hope it translated okay.</em></dd>
-     <dd>
-        <ul>
-          <li><strong>Contribution</strong>
-           <ol>
-              <li>Wrote HTML code for job application form, home page</li>
-              <li>Wrote CSS and html for footer and header</li>
-              <li>Wrote CSS for apply.html, background, and some styling across the pages</li>
-              <li>wrote CSS for basic page layouts and style</li>
-              <li>Validated my HTML and CSS and corrected any warnings and errors</li>
-
-
-           </ol>
-         </li>
-       </ul>
-      </dd>
-   </dl>
-   <dl class="team-member">
-     <dt>Ngo My An Dang</dt>
-     <dd> Das Leben und dazu eine Katze, das gibt eine unglaubliche Summe.</dd>  
-     <dd><em>Life and a cat, that adds up to an incredible sum.</em></dd>
-     <dd>
-       <ul>
-          <li><strong>Contribution</strong>
-            <ol>
-              <li>Wrote HTML code for job descriptions of Cyber Security Assurance Analyst and Digital Forensic Examiner.</li>
-              <li>Wrote CSS for jobs.html</li>
-              <li>Validated my HTML and CSS and corrected any warnings and errors</li>
-            </ol>
-         </li>
-       </ul>
-      </dd>
-   </dl>
+<?php } ?>
    </div>
-
+ 
+<?php   if ($max_facts > 0) { ?>
    <!--Table of fun facts-->
    <table class="fun-facts-table">
      <caption><strong>Team Member Fun Facts :D</strong></caption>
      <tr>
        <th>Team Member</th>
-       <th>Fun Fact #1</th>
-       <th>Fun Fact #2</th>
+<?php       for ($n = 1; $n <= $max_facts; $n++) { ?>
+       <th>Fun Fact #<?php echo $n; ?></th>
+<?php       } ?>
      </tr>
+<?php       foreach ($members as $member) {
+                $member_id = $member['member_id']; ?>
      <tr>
-        <td>Allegra Masri</td>
-        <td>I have an unhealthy obsession with collecting stickers and art prints</td>
-        <td>I have over 1350 hours on animal crossing new horizons</td>
-      </tr>
-      <tr>
-        <td>Freshta Ahmadi</td>
-        <td>I held a snake in my hands when I was in Grade 3</td>
-        <td>I was in the top 1% of monthly listeners for 3 different artists this year</td>
-      </tr>
-      <tr>
-        <td>Zoe Ballantyne</td>
-        <td>I made jewellery out of my wisdom teeth</td>
-        <td>I have grey eyes, which is really rare and cool</td>
-      </tr>
-      <tr>
-        <td>Ngo My An Dang</td>
-        <td>I'm a big fan of 3rd gen hit boygroup Seventeen</td>
-        <td>I saw one of my top artists at a concert last year</td>
-      </tr>
-    </table>
+       <td><?php echo htmlspecialchars($member['full_name']); ?></td>
+<?php           for ($n = 0; $n < $max_facts; $n++) { ?>
+       <td><?php if (isset($facts[$member_id][$n])) { echo htmlspecialchars($facts[$member_id][$n]); } ?></td>
+<?php           } ?>
+     </tr>
+<?php       } ?>
+   </table>
+<?php   } ?>
+<?php } else { ?>
+    <h1>Meet the Team</h1>
+    <p>Sorry, our team information is unavailable at the moment. Please try again later.</p>
+<?php } ?>
   </main>
 
-  <footer>
-<!---site footer with links to Github repo, Jira Board and contact email-->
-    <p ><a href="https://github.com/106131320/Project-part-1" target="_blank">Cyber Snug's Github Page!</a></p>
-    <p ><a href="https://snugcyber.atlassian.net?continue=https%3A%2F%2Fsnugcyber.atlassian.net%2Fwelcome%2Fsoftware&atlOrigin=eyJpIjoiZGUwYWVmOGFkY2FlNDNkOGJjMmJmNWQ0NGI5NGQwYzEiLCJwIjoiaiJ9" 
-    target="_blank">Cyber Snug's Jira portfolio </a></p>
-    <p ><a href="mailto:snugcyber@gmail.com" target="_blank">snugcyber@gmail.com</a></p>
-  </footer>
-
-  
-</body>
-
-
-
-</html>
+<?php require_once 'footer.inc'; ?>

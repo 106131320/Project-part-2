@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!--- meta elements -->
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="Application form for Cyber Snug">
-  <meta name="keywords" content="Cyber Snug, application form, application, apply">
-  <meta name="author" content="html wizards">
-  <title>Job Application</title>
-  <link rel="stylesheet" href="./styles/styles.css" type="text/css">
-<!--- added the link to stylesheet -->
-
-<!--- embedded css -->
-<!--style the fieldset legends-->
+<?php
+$page_title = 'Job Application';
+$page_description = 'Application form for Cyber Snug';
+$page_keywords = 'Cyber Snug, application form, application, apply';
+$extra_head = '
+  <!-- Embedded CSS  -->
+  <!--style the fieldset legends-->
   <style>
   legend {
     font-size: 1.4rem;
@@ -20,36 +12,13 @@
     color: black;
     padding: 0 10px;
   }
-  </style>
-</head>
+  </style>';
+ 
+// shared layout: <head>, then site header/navigation
+require_once 'header.inc';
+require_once 'nav.inc';
+?>
 
-<body>
-
-  <header>
-  <!--- added links to each page -->
-  <!--main site nav, including logo with lightbox popup-->
-  <nav>
-    <ul>
-      <li>
-        <a href="#logo-lightbox">
-        <img id="logo" src="images/Cyber_Snug_FINAL.png" alt="Company Logo">
-        </a>
-      </li>
-      <li><a href="./">Home</a></li>
-      <li><a href="./jobs.php">Available Jobs</a></li>
-     <li><a href="./apply.php">Application Form</a></li>
-     <li><a href="./about.php">About Us</a></li>
-    </ul>
-  </nav>
-  </header>
-
-  <!--Hidden lightbox that displays enlarged version of logo when nav logo link is clicked-->
-  <div class="lightbox" id="logo-lightbox">
-    <a href="#" aria-label="Close">
-      <span style="background-image: url('images/Cyber_Snug_FINAL.png');"></span>
-    </a>
-  </div>
-  
 <main class="application_body">
 
   <h1>Application Form</h1>
@@ -168,17 +137,4 @@
     </form>
 </main>
 
-  <!--Site footer with links Github repo, Jira Board and contact email-->
-  <footer>
-    <p ><a href="https://github.com/106131320/Project-part-1" target="_blank">Cyber Snug's Github Page!</a></p>
-    <p ><a href="https://snugcyber.atlassian.net?continue=https%3A%2F%2Fsnugcyber.atlassian.net%2Fwelcome%2Fsoftware&atlOrigin=eyJpIjoiZGUwYWVmOGFkY2FlNDNkOGJjMmJmNWQ0NGI5NGQwYzEiLCJwIjoiaiJ9" 
-    target="_blank">Cyber Snug's Jira portfolio </a></p>
-    <p ><a href="mailto:snugcyber@gmail.com" target="_blank">snugcyber@gmail.com</a></p>
-  </footer>
-  
-  
-</body>
-
-
-
-</html>
+<?php require_once 'footer.inc'; ?>
