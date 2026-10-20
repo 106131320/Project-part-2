@@ -172,7 +172,7 @@ if (!empty($errors)) {
 $createTableSQL = "
 CREATE TABLE IF NOT EXISTS `$table` (
     eoi_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    job_ref CHAR(5) NOT NULL,
+    job_ref CHAR(6) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     date_of_birth DATE NOT NULL,
