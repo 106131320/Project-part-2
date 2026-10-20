@@ -13,7 +13,8 @@ if (!isset($page_keywords)) {
 <html lang="en">
  
 <!--- meta elements -->
-<--- use source for htmlspecialchars() from https://coddy.tech/docs/php/htmlspecialchars --->
+<!--- use source for htmlspecialchars() from https://coddy.tech/docs/php/htmlspecialchars --->
+
 <head>
   <meta charset="utf-8">
   <meta name="description" content="<?php echo htmlspecialchars($page_description); ?>">
