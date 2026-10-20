@@ -44,13 +44,15 @@ require_once 'nav.inc';
                     <h2>Position <?php echo $job_count; ?>: <?php echo $row['job_title']; ?></h2>
                     
                     <div class="job_description"> <!-- div container to group job info together and apply css class for styles -->
-                        <p><strong>Reference Number:</strong> <?php echo $row['job_reference_number']; ?></p> <!-- retrieves job desc from db & display onto webpage -->
+
+                      <!-- retrieves job details from db & display onto webpage -->
+                        <p><strong>Reference Number:</strong> <?php echo $row['job_reference_number']; ?></p>
                         <p><strong>Salary:</strong> <?php echo $row['salary_range']; ?></p>
                         <p><strong>Reporting Line:</strong> <?php echo $row['reporting_line']; ?></p>
                     </div>
 
                     <h3>Job Description</h3>
-                    <p><?php echo $row['job_description']; ?></p>
+                    <p><?php echo $row['job_description']; ?></p> <!-- retrieves job desc from db & display onto webpage -->
 
                     <h3>Key Responsibilities</h3>
                     <ul>
