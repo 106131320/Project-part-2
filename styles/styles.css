@@ -448,23 +448,8 @@ input[type="reset"]:hover {
   box-sizing: border-box;
 }
 
-.job_description {
-  width: 100%;
-  max-width: 100%;
-  margin: 10px auto;
-  padding: 20px;
-  background-color: #efeff7;
-  /* Light grey-blue background */
-  border: 3px solid var(--main-purple);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */ 
-}
 
-
-
-
-.available_jobs {
+#position {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -479,6 +464,19 @@ input[type="reset"]:hover {
   /* Subtle shadow for depth */ 
 }
 
+.job_description {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #efeff7;
+  /* Light grey-blue background */
+  border: 3px solid var(--main-purple);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */ 
+}
+
 
 h1 {
   padding: 0.3em;
@@ -488,146 +486,7 @@ h2 {
   padding: 0.35em;
 }
 
-/* --- Custom styling for sections --- */
-section {
-  width: 40%;
-  padding: 1em;
-}
 
-/* --- Custom styling for engineer- sections and elements --- */
-#engineer-details {
-  border: 3px inset var(--main-purple);
-  border-radius: 4px;
-  /* --- Create a border --- */
-  padding: 1em;
-  width: 100%;
-}
-
-/* --- Make requirement sections be inline with each other --- */
-#engineer-preferable-requirements, #engineer-essential-requirements {
-  display: inline-block;
-  margin-bottom: 1em;
-}
-
-#engineer-essential-requirements {
-  margin-right: 1em;
-}
-
-#engineer-preferable-requirements {
-  margin-right: 3em;
-  width: 50%;
-  float: right;
-}
-
-/* --- Adjust width for responsibilities section --- */
-#engineer-responsibilities {
-  width: 100%;
-}
-
-/* --- Custom styling for architect- sections and elements --- */
-#architect-details {
-  border: 3px inset var(--main-purple);
-  border-radius: 4px;
-  /* --- Create a border --- */
-  padding: 1em;
-  width: 100%;
-}
-
-/* --- Make requirement sections be inline with each other --- */
-#architect-preferable-requirements, #architect-essential-requirements {
-  display: inline-block;
-  margin-bottom: 1em;
-}
-
-#architect-essential-requirements {
-  margin-right: 1em;
-}
-
-#architect-preferable-requirements {
-  margin-right: 3em;
-  width: 50%;
-  float: right;
-}
-
-/* --- Adjust width for responsibilities section --- */
-#architect-responsibilities {
-  width: 100%;
-}
-
-/* --- Custom styling for security- sections and elements --- */
-#security-details {
-  border: 3px inset var(--main-purple);
-  border-radius: 4px;
-  /* --- Create a border --- */
-  padding: 1em;
-  width: 100%;
-}
-
-/* --- Make requirement sections be inline with each other --- */
-#security-preferable-requirements, #security-essential-requirements {
-  display: inline-block;
-  margin-bottom: 1em;
-}
-
-#security-essential-requirements {
-  margin-right: 1em;
-}
-
-#security-preferable-requirements {
-  margin-right: 3em;
-  width: 50%;
-  float: right;
-}
-
-/* --- Adjust width for responsibilities section --- */
-#security-responsibilities {
-  width: 100%;
-}
-
-/* --- Custom styling for examiner- sections and elements --- */
-#examiner-details {
-  border: 3px inset var(--main-purple);
-  border-radius: 4px;
-  /* --- Create a border --- */
-  padding: 1em;
-  width: 100%;
-}
-
-/* --- Make requirement sections be inline with each other --- */
-#examiner-preferable-requirements, #examiner-essential-requirements {
-  display: inline-block;
-  margin-bottom: 1em;
-}
-
-#examiner-essential-requirements {
-  margin-right: 1em;
-}
-
-#examiner-preferable-requirements {
-  margin-right: 3em;
-  width: 50%;
-  float: right;
-}
-
-/* --- Adjust width for responsibilities section --- */
-#examiner-responsibilities {
-  width: 100%;
-}
-
-/* --- Make aside sections and description sections inline --- */
-aside, #engineer-description, #architect-description, #security-description, #examiner-description {
-  display: inline-block;
-}
-
-/* --- Custom styling for aside elements --- */
-
-.jobs_aside {
-  width: 100%;
-  border: 3px inset var(--main-purple);
-  border-radius: 4px;
-  margin-top: 1em;
-  padding: 1em;
-}
 /* --- Styling for menu --- */
 .menu {
   display: flex;
