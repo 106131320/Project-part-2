@@ -441,11 +441,11 @@ input[type="reset"]:hover {
 /* --- Job Page Styling --- */
 
 .jobs_main {
-  width: 80%;
-  max-width: 80%;
-  margin: 0 auto;
-  background-color: #d3d3dd;
-  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  margin: 10px auto;
+  background-color: transparent;
+  box-sizing: border-box;
 }
 
 .job_description {
@@ -883,3 +883,5 @@ aside, #engineer-description, #architect-description, #security-description, #ex
 .acknowledgment-of-land {
   text-align: center;
 }
+
+

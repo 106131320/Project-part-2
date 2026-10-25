@@ -20,13 +20,50 @@ require_once 'nav.inc';
 ?>
 
   <main class="jobs_main">
+    <!--- job search bar -->
+    <div class="job_search">
+        <form method="get" action="jobs.php">
+           <label for="search">Search available positions:</label>
+           <input type="text" id="search" name="search" placeholder="Enter a job title or keyword..."
+              value="<?php echo htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+           <button type="submit">Search</button>
+            <a href="jobs.php">Clear search</a>
+    </form>
+</div>
+
     <?php
+    
     require_once 'settings.php'; //include db settings
     
     
     if ($conn) { //check for succcessful connection
-        $query = "SELECT * FROM jobs ORDER BY job_id"; // fetch jobs from db
-        $result = mysqli_query($conn, $query); //execute query on given connection
+    $search = trim($_GET['search'] ?? '');
+// searches database for any matching words in any table for jobs, and only shows the one with keywords
+
+    if ($search !== '') {
+        $query = "SELECT * FROM jobs
+              WHERE CONCAT_WS(' ',
+                  job_reference_number,
+                  job_title,
+                  salary_range,
+                  reporting_line,
+                  job_description,
+                  key_responsibilities,
+                  essential_requirements,
+                  preferable_requirements
+              ) LIKE ?
+              ORDER BY job_id";
+
+        $stmt = mysqli_prepare($conn, $query);
+        $search_term = '%' . $search . '%';
+        mysqli_stmt_bind_param($stmt, "s", $search_term);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    } else {
+        $query = "SELECT * FROM jobs ORDER BY job_id";
+        $result = mysqli_query($conn, $query);
+    }
+
         
         if ($result && mysqli_num_rows($result) > 0) {
             echo "<!-- Jobs loaded from db -->";
@@ -40,7 +77,7 @@ require_once 'nav.inc';
                 }
                 ?>
                 
-                <section id="job<?php echo $job_count; ?>" class="jobs_main"> <!-- create sections for each job and apply css class for styles -->
+                <section id="job<?php echo $job_count; ?>" class="job_description"> <!-- create sections for each job and apply css class for styles -->
                     <h2>Position <?php echo $job_count; ?>: <?php echo $row['job_title']; ?></h2>
                     
                     <div class="job_description"> <!-- div container to group job info together and apply css class for styles -->

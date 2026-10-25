@@ -23,24 +23,23 @@ require_once 'nav.inc';
 
   <h1>Application Form</h1>
   <!--submits via POST to swinburne endpoint-->
-    <form action="https://mercury.swin.edu.au/it000000/formtest.php" method="post">
-      <fieldset class="applicant-info-fieldset">
+      <form action="process.php" method="post">      <fieldset class="applicant-info-fieldset">
         <legend>Applicant Information</legend>
           <!--- job reference input only allows people to type 6 alphanumeric characters  -->
 
-        <label for="Job_reference_number">Job reference number:</label>
-        <input class="selectable" type="text" id="Job_reference_number" name="Job_reference_number"  pattern=".{6}" placeholder="abc123" required>
+        <label for="reference-number">Job reference number:</label>
+        <input class="selectable" type="text" id="reference-number" name="reference-number"  pattern=".{6}" placeholder="abc123" required>
 
-       <label for="First_name">First name:</label>
+       <label for="first-name">First name:</label>
        <!--Letters only, up to 20 characters-->
-        <input class="selectable" type="text" id="First_name" name="First_name"  pattern="[A-Za-z]{1,20}" placeholder="Jane" required>
+        <input class="selectable" type="text" id="first-name" name="first-name"  pattern="[A-Za-z]{1,20}" placeholder="Jane" required>
         
-        <label for="Last_name">Last name:</label>
-        <input class="selectable" type="text" id="Last_name" name="Last_name"  pattern="[A-Za-z]{1,20}" placeholder="Doe" required>
+        <label for="last-name">Last name:</label>
+        <input class="selectable" type="text" id="last-name" name="last-name"  pattern="[A-Za-z]{1,20}" placeholder="Doe" required>
 
-       <label for="Date_of_birth">Date of birth:</label>
+       <label for="date-of-birth">Date of birth:</label>
        <!--restricts data picker so no date after Jan 1st 2026 can be chosen-->
-       <input class="selectable" type="date" id="Date_of_birth" name="Date_of_birth" max="2026-01-01" required>
+       <input class="selectable" type="date" id="date-of-birth" name="date-of-birth" max="2026-01-01" required>
   
       <!--gender roles, radio group-->
       <fieldset class="gender-fieldset">
@@ -91,9 +90,9 @@ require_once 'nav.inc';
       <label for="email">Email:</label>
       <input class="selectable" type="email" id="email" name="email" placeholder="example@email.com" required="">
     
-      <label for="phone">Phone:</label>
+      <label for="phone-number">Phone:</label>
       <!--Must be exactly 10 digits-->
-      <input class="selectable" type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="0412345678" required="">
+      <input class="selectable" type="tel" id="phone-number" name="phone-number" pattern="[0-9]{10}" placeholder="0412345678" required="">
     </fieldset>
 
 <!--skills section, set of checkboxes and optional "other skills" text area-->

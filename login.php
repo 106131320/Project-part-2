@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result && password_verify($password, $result['password_hash'])) {
         $_SESSION['user'] = $username;
-        header("Location: welcome.php"); // this goes to the welcome page after login, would need to change to go to the jobs manage page
+        header("Location: manage.php"); // this goes to the welcome page after login, would need to change to go to the jobs manage page
         exit;
     } else {
         $error = "Invalid username or password!";

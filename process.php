@@ -51,8 +51,8 @@ $data['other-skills'] = isset($_POST['other-skills']) ? 'Yes' : 'No';
 // Validate 'reference-number'
 if (empty($data['reference-number'])) {
     $errors[] = "Reference Number is required.";
-} elseif (!preg_match('/^[a-zA-Z0-9]{5}$/', $data['reference-number'])) {
-    $errors[] = "Reference Number must be 5 alphanumeric characters.";
+} elseif (!preg_match('/^[a-zA-Z0-9]{6}$/', $data['reference-number'])) {
+    $errors[] = "Reference Number must be 6 alphanumeric characters.";
 }
 
 // Validate 'first-name'
@@ -69,20 +69,22 @@ if (empty($data['last-name'])) {
     $errors[] = "Last Name must be 1-20 alphabetic characters.";
 }
 
-// Validate 'date-of-birth'
+ // Validate 'date-of-birth'
 if (empty($data['date-of-birth'])) {
     $errors[] = "Date of Birth is required.";
 } else {
-    // Validate DD/MM/YYYY format
-    if (!preg_match('/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/', $data['date-of-birth'])) {
-        $errors[] = "Invalid Date of Birth format. Use DD/MM/YYYY.";
+    $date_of_birth = $data['date-of-birth'];
+
+    $date = DateTime::createFromFormat('!Y-m-d', $date_of_birth);
+
+    if (
+        !$date ||
+        $date->format('Y-m-d') !== $date_of_birth
+    ) {
+        $errors[] = "Invalid Date of Birth.";
     } else {
-        $dob_parts = explode('/', $data['date-of-birth']);
-        if (count($dob_parts) === 3) {
-            $data['date-of-birth'] = $dob_parts[2] . '-' . $dob_parts[1] . '-' . $dob_parts[0];
-        } else {
-            $errors[] = "Invalid date format. Use DD/MM/YYYY.";
-        }
+        // Keep the YYYY-MM-DD format for the MySQL DATE column
+        $data['date-of-birth'] = $date_of_birth;
     }
 }
 
@@ -185,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `$table` (
     phone_number VARCHAR(15),
     communication ENUM('Yes','No'),
     teamwork ENUM('Yes','No'),
-    problem-solving ENUM('Yes','No'),
+    `problem-solving` ENUM('Yes','No'),
     adaptability ENUM('Yes','No'),
     other_skills ENUM('Yes','No'),
     other_skills_long TEXT,
@@ -199,8 +201,8 @@ if (!mysqli_query($conn, $createTableSQL)) {
 
 $insertSQL = "INSERT INTO `$table`
     (job_ref, first_name, last_name, date_of_birth, gender, street_address, town, state, postcode,
-     email, phone_number, communication, teamwork, problem-solving, adaptability, other_skills, other_skills_long)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     email, phone_number, communication, teamwork, `problem-solving`, adaptability, other_skills, other_skills_long)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($conn, $insertSQL);
 
@@ -212,7 +214,7 @@ $genderForDB = $data['gender'];
 
 mysqli_stmt_bind_param(
     $stmt,
-    "ssssssssssssssssss",
+    "sssssssssssssssss",
     $data['reference-number'],
     $data['first-name'],
     $data['last-name'],
