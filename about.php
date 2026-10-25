@@ -4,10 +4,10 @@ $page_description = 'About Cyber Snug team';
 $page_keywords = 'Cyber Snug, about us, our team, meet the team';
 $extra_css = '
   <!-- Embedded CSS  -->
-  <!--Gives h1 and h2 a light purple outline effect using text-stroke-->
+  <!--Gives h1 a light purple outline effect using text-stroke-->
   <style>
-    h1 , h2 {
-        -webkit-text-stroke: 1px #AEAFFF;
+    h1 {
+      -webkit-text-stroke: 1px #AEAFFF;
       color: black;
     }
   </style>';

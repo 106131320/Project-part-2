@@ -441,8 +441,8 @@ input[type="reset"]:hover {
 /* --- Job Page Styling --- */
 
 .jobs_main {
-  width: 100%;
-  max-width: 100%;
+  width: 80%;
+  max-width: 80%;
   margin: 10px auto;
   background-color: transparent;
   box-sizing: border-box;
@@ -484,6 +484,8 @@ h1 {
 
 h2 {
   padding: 0.35em;
+  -webkit-text-stroke: 1px #AEAFFF;
+  color: black;
 }
 
 
