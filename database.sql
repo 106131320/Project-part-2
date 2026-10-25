@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2026 at 02:38 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Oct 25, 2026 at 05:52 PM
+-- Server version: 10.11.16-MariaDB
+-- PHP Version: 8.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,26 +28,33 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `eoi` (
-  `EOI_number` int(11) NOT NULL,
-  `job_reference_number` varchar(10) NOT NULL,
-  `first_name` varchar(20) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
+  `eoi_id` int(10) UNSIGNED NOT NULL,
+  `job_ref` char(6) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   `date_of_birth` date NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `street_address` varchar(40) NOT NULL,
-  `suburb_town` varchar(40) NOT NULL,
-  `state` varchar(3) NOT NULL,
-  `postcode` char(4) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone_number` varchar(10) NOT NULL,
-  `skill1` varchar(50) DEFAULT NULL,
-  `skill2` varchar(50) DEFAULT NULL,
-  `skill3` varchar(50) DEFAULT NULL,
-  `skill4` varchar(50) DEFAULT NULL,
-  `other_skills` text DEFAULT NULL,
-  `status` enum('New','Current','Final') DEFAULT 'New',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `gender` enum('Male','Female','Other','Prefer not to say') DEFAULT NULL,
+  `street_address` varchar(150) DEFAULT NULL,
+  `town` varchar(100) DEFAULT NULL,
+  `state` char(3) DEFAULT NULL,
+  `postcode` char(4) DEFAULT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `communication` enum('Yes','No') DEFAULT NULL,
+  `teamwork` enum('Yes','No') DEFAULT NULL,
+  `problem-solving` enum('Yes','No') DEFAULT NULL,
+  `adaptability` enum('Yes','No') DEFAULT NULL,
+  `other_skills` enum('Yes','No') DEFAULT NULL,
+  `other_skills_long` text DEFAULT NULL,
+  `status` enum('New','Current','Final') DEFAULT 'New'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `eoi`
+--
+
+INSERT INTO `eoi` (`eoi_id`, `job_ref`, `first_name`, `last_name`, `date_of_birth`, `gender`, `street_address`, `town`, `state`, `postcode`, `email`, `phone_number`, `communication`, `teamwork`, `problem-solving`, `adaptability`, `other_skills`, `other_skills_long`, `status`) VALUES
+(1, 'CS481E', 'Zoe', 'Ba', '2023-01-03', 'Female', '123 example road', 'burger', 'NSW', '1231', 'zoe@gmail.com', '0415598222', 'Yes', 'No', 'No', 'No', 'No', '', 'Current');
 
 -- --------------------------------------------------------
 
@@ -248,7 +255,7 @@ INSERT INTO `users` (`id`, `username`, `password_hash`) VALUES
 -- Indexes for table `eoi`
 --
 ALTER TABLE `eoi`
-  ADD PRIMARY KEY (`EOI_number`);
+  ADD PRIMARY KEY (`eoi_id`);
 
 --
 -- Indexes for table `jobs`
@@ -299,7 +306,7 @@ ALTER TABLE `team_members`
 -- AUTO_INCREMENT for table `eoi`
 --
 ALTER TABLE `eoi`
-  MODIFY `EOI_number` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `eoi_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jobs`
