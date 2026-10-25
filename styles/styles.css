@@ -445,7 +445,26 @@ input[type="reset"]:hover {
   max-width: 80%;
   margin: 0 auto;
   background-color: #d3d3dd;
+  border-left: 6px solid var(--main-purple);
+  border-right: 6px solid var(--main-purple);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex: 1;
+}
+
+
+#position {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #efeff7;
+  /* Light grey-blue background */
+  border: 3px solid var(--main-purple);
+  border-top: 0px solid var(--main-purple);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  /* Subtle shadow for depth */ 
 }
 
 .job_description {
@@ -462,36 +481,12 @@ input[type="reset"]:hover {
 }
 
 
-
-
-.available_jobs {
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #efeff7;
-  /* Light grey-blue background */
-  border: 3px solid var(--main-purple);
-  border-top: 0px solid var(--main-purple);
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  /* Subtle shadow for depth */ 
-}
-
-
 h1 {
   padding: 0.3em;
 }
 
 h2 {
   padding: 0.35em;
-}
-
-/* --- Custom styling for sections --- */
-section {
-  width: 40%;
-  padding: 1em;
 }
 
 

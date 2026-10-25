@@ -40,7 +40,7 @@ require_once 'nav.inc';
                 }
                 ?>
                 
-                <section id="job<?php echo $job_count; ?>" class="jobs_main"> <!-- create sections for each job and apply css class for styles -->
+                <section id="position"> <!-- create sections for each job and apply css class for styles -->
                     <h2>Position <?php echo $job_count; ?>: <?php echo $row['job_title']; ?></h2>
                     
                     <div class="job_description"> <!-- div container to group job info together and apply css class for styles -->
