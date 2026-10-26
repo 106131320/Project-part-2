@@ -130,7 +130,7 @@ INSERT INTO `member_contributions` (`contribution_id`, `member_id`, `project_id`
 (41, 1, 2, 'Managed the presentation', 4),
 (42, 3, 2, 'Partially completed task 6', 2),
 (43, 3, 2, 'Assisted in task 2', 3),
-(44, 4, 2, 'Completed task 5', 2);
+(44, 4, 2, 'Completed part of task 5 (jobs table + render code & css styling)', 2);
 
 -- --------------------------------------------------------
 
