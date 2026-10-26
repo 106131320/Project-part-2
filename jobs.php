@@ -56,7 +56,7 @@ require_once 'nav.inc';
 
         
         if ($result && mysqli_num_rows($result) > 0) {
-            echo "<!-- Jobs loaded from db -->";
+            echo "<!-- Loading jobs from db -->";
             
             $job_count = 0; //initialize job counter
             while ($row = mysqli_fetch_assoc($result)) {
@@ -87,7 +87,7 @@ require_once 'nav.inc';
                         $responsibilities = explode(';', $row['key_responsibilities']); //splits text whenever semicolon is detected
                         foreach ($responsibilities as $responsibility) { //loops through array
                             if (trim($responsibility)) { //removes whitespaces from beginning & end of string
-                                echo '<li>' . trim($responsibility) . '</li>'; //display each as a bullet point
+                                echo '<li>' . htmlspecialchars(trim($responsibility)) . '</li>'; //display each as a bullet point
                             }
                         }
                         ?>
@@ -100,7 +100,7 @@ require_once 'nav.inc';
                         $essentials = explode(';', $row['essential_requirements']);
                         foreach ($essentials as $essential) {
                             if (trim($essential)) {
-                                echo '<li>' . trim($essential) . '</li>';
+                                echo '<li>' . htmlspecialchars(trim($essential)) . '</li>';
                             }
                         }
                         ?>
@@ -113,11 +113,11 @@ require_once 'nav.inc';
                             $preferables = explode(';', $row['preferable_requirements']);
                             foreach ($preferables as $preferable) {
                                 if (trim($preferable)) {
-                                    echo '<li>' . trim($preferable) . '</li>';
+                                    echo '<li>' . htmlspecialchars(trim($preferable)) . '</li>';
                                 }
                             }
                         } else {
-                            echo '<li>None specified</li>';
+                            echo '<li>None specified.</li>';
                         }
                         ?>
                     </ul>
@@ -129,18 +129,13 @@ require_once 'nav.inc';
             mysqli_free_result($result); // free the memory associated db
         } else {
             // if no jobs found in db
-            echo '<div class="error-message">';
-            echo '<h2>No Job Positions Available</h2>';
-            echo '</div>';
+            echo '<h2>No job positions listed.</h2>';
         }
         
         mysqli_close($conn); //close db connection
     } else {
         // failed db connection
-        echo '<div class="error-message">';
-        echo '<h2>Database Connection Error</h2>';
-        echo '<p>Unable to load job positions at this time. Please try again later.</p>';
-        echo '</div>';
+        echo '<h2>Unable to load job positions at this time. Please try again later.</h2>';
     }
     ?>
   </main>
