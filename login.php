@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     $result = $stmt->get_result()->fetch_assoc();
 
-    if ($result && password_verify($password, $result['password_hash'])) {
+    if ($result && password_verify($password, $result['password'])) {
         $_SESSION['user'] = $username;
-        header("Location: manage.php"); // this goes to the welcome page after login, would need to change to go to the jobs manage page
+        header("Location: manage.php"); 
         exit;
     } else {
         $error = "Invalid username or password!";
@@ -30,7 +30,7 @@ $conn->close();}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Login</title>
-    <link rel="stylesheet" href="styles/project.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body id="login">

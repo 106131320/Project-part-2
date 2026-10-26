@@ -9,6 +9,8 @@ description: Global styles for the project, including layout, typography, and co
 /* --- Variable Declaration --- */
 :root {
   --main-purple: #AEAFFF;
+  --login-primary-purple: #8789d6;
+
 }
 
 /* --- Base Styles --- */
@@ -784,6 +786,94 @@ h2 {
 
 .acknowledgment-of-land {
   text-align: center;
+}
+
+
+/* --- Login Page Specific Styles --- */
+body#login {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #74ABE2, var(--login-primary-purple));
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  /* Overrides general body margin */
+  padding: 0;
+  /* Overrides general body padding */
+  max-width: 100%;
+  /* Allows flexbox to manage full width */
+}
+
+.login-container {
+  background: #fff;
+  padding: 2.5rem 3rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.login-container input:focus {
+  border-color: var(--login-primary-purple);
+  outline: none;
+  box-shadow: 0 0 5px rgba(85, 99, 222, 0.3);
+}
+
+.login-container button {
+  width: 100%;
+  background: var(--login-primary-purple);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.login-container button:hover {
+  background: #3d4bb5;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.success-message {
+  color: #27ae60;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-container a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--login-primary-purple);
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
 }
 
 

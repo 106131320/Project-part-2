@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2026 at 06:12 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Oct 26, 2026 at 08:10 AM
+-- Server version: 10.11.16-MariaDB
+-- PHP Version: 8.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,7 +54,7 @@ CREATE TABLE `eoi` (
 --
 
 INSERT INTO `eoi` (`eoi_id`, `job_ref`, `first_name`, `last_name`, `date_of_birth`, `gender`, `street_address`, `town`, `state`, `postcode`, `email`, `phone_number`, `communication`, `teamwork`, `problem-solving`, `adaptability`, `other_skills`, `other_skills_long`, `status`) VALUES
-(1, 'CS481E', 'Zoe', 'Ba', '2023-01-03', 'Female', '123 example road', 'burger', 'NSW', '1231', 'zoe@gmail.com', '0415598222', 'Yes', 'No', 'No', 'No', 'No', '', 'Current');
+(1, 'CS481E', 'Zoe', 'Ba', '2023-01-03', 'Female', '123 example road', 'burger', 'NSW', '1231', 'zoe@gmail.com', '0415598222', 'Yes', 'No', 'No', 'No', 'No', '', 'Final');
 
 -- --------------------------------------------------------
 
@@ -128,10 +128,9 @@ INSERT INTO `member_contributions` (`contribution_id`, `member_id`, `project_id`
 (39, 1, 2, 'Finalised task 2', 2),
 (40, 1, 2, 'Completed task 7', 3),
 (41, 1, 2, 'Managed the presentation', 4),
-(42, 3, 2, 'Completed task 6', 2),
-(43, 3, 2, 'Assisted in task 2 (created the first version of settings.php)', 3),
-(44, 4, 2, 'Completed part of task 5 (jobs table + render code & css styling)', 2),
-(45, 3, 2, 'Assisted in task 5 (CSS debugging and created search bar)', 4);
+(42, 3, 2, 'Partially completed task 6', 2),
+(43, 3, 2, 'Assisted in task 2', 3),
+(44, 4, 2, 'Completed task 5', 2);
 
 -- --------------------------------------------------------
 
@@ -237,16 +236,16 @@ INSERT INTO `team_members` (`member_id`, `team_id`, `full_name`, `preferred_name
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password_hash` varchar(255) NOT NULL
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password_hash`) VALUES
-(1, 'admin', '$2y$10$y3YtEDEqaX4ZsBsgkRrYXe9ATfNUPZZb1mnzEW2Qgan8JPjO/FjTS');
+INSERT INTO `users` (`id`, `username`, `password`) VALUES
+(1, 'admin', '$2y$12$JRzn1MGxwRRN0B1MzlcDueJF9qn.kuQ5wDlwoVqtMAKR4mukeTqXC');
 
 --
 -- Indexes for dumped tables
@@ -300,6 +299,13 @@ ALTER TABLE `team_members`
   ADD KEY `team_id` (`team_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -319,7 +325,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `member_contributions`
 --
 ALTER TABLE `member_contributions`
-  MODIFY `contribution_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `contribution_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `member_fun_facts`
@@ -344,6 +350,12 @@ ALTER TABLE `team_info`
 --
 ALTER TABLE `team_members`
   MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
