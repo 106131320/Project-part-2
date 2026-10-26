@@ -1,6 +1,5 @@
 <?php
-session_start();
-$page_title = 'Position Description';
+$page_title = 'Position Descriptions';
 $page_description = 'Job Description for available roles at Cyber Snug';
 $page_keywords = 'Cyber Snug, careers, cyber security engineer, cyber security architect, cyber security assurance analyst, digital forensics examiner, job description';
 $body_id = 'jobs_page';
