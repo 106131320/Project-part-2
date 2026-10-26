@@ -79,7 +79,7 @@ require_once 'nav.inc';
                     </div>
 
                     <h3>Job Description</h3>
-                    <p><?php echo $row['job_description']; ?></p> <!-- retrieves job desc from db & display onto webpage -->
+                    <p><?php echo htmlspecialchars($row['job_description']); ?></p> <!-- retrieves job desc from db & display onto webpage -->
 
                     <h3>Key Responsibilities</h3>
                     <ul>
