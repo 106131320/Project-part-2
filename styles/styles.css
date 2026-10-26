@@ -508,6 +508,13 @@ button {
   /* Aligns button to the left within flex container */
 }
 
+button:hover {
+  background-color: #5d5e86;
+  /* Darker blue on hover */
+  transform: translateY(-2px);
+  /* Slight lift effect */
+}
+
 input {
   width: 100%;
   max-width: 100%;
