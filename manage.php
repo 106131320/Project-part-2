@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user'])) {
+// Only allow logged-in users to access this page
+if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }

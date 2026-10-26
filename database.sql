@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2026 at 08:10 AM
+-- Generation Time: Oct 26, 2026 at 08:13 AM
 -- Server version: 10.11.16-MariaDB
 -- PHP Version: 8.5.12
 
@@ -54,7 +54,8 @@ CREATE TABLE `eoi` (
 --
 
 INSERT INTO `eoi` (`eoi_id`, `job_ref`, `first_name`, `last_name`, `date_of_birth`, `gender`, `street_address`, `town`, `state`, `postcode`, `email`, `phone_number`, `communication`, `teamwork`, `problem-solving`, `adaptability`, `other_skills`, `other_skills_long`, `status`) VALUES
-(1, 'CS481E', 'Zoe', 'Ba', '2023-01-03', 'Female', '123 example road', 'burger', 'NSW', '1231', 'zoe@gmail.com', '0415598222', 'Yes', 'No', 'No', 'No', 'No', '', 'Final');
+(1, 'CS481E', 'Zoe', 'Ba', '2023-01-03', 'Female', '123 example road', 'burger', 'NSW', '1231', 'zoe@gmail.com', '0415598222', 'Yes', 'No', 'No', 'No', 'No', '', 'Final'),
+(2, 'CS481E', 'example', 'two', '2025-12-29', 'Other', '12 example town', 'example suburb', 'TAS', '1234', 'example@gmail.com', '0412345678', 'No', 'Yes', 'No', 'No', 'Yes', 'example', 'New');
 
 -- --------------------------------------------------------
 
@@ -313,7 +314,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `eoi`
 --
 ALTER TABLE `eoi`
-  MODIFY `eoi_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `eoi_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jobs`
