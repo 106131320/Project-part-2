@@ -451,7 +451,7 @@ input[type="reset"]:hover {
 .job_search {
   width: 100%;
   max-width: 100%;
-  margin: 0 auto;
+  margin: -10px auto;
   padding: 20px;
   background-color: #efeff7;
   border: 3px solid var(--main-purple);
@@ -488,7 +488,7 @@ input[type="reset"]:hover {
   /* Subtle shadow for depth */ 
 }
 
-label {
+.search-label {
   font-weight: bold;
   font-size: x-large;
 }
