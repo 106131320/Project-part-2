@@ -510,6 +510,11 @@ button {
   /* Aligns button to the left within flex container */
 }
 
+.search-button:hover {
+  background-color: #7a7ccf;
+  transform: translateY(-2px);
+}
+
 .search-input {
   width: 100%;
   max-width: 100%;
