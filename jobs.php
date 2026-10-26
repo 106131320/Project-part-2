@@ -15,7 +15,7 @@ require_once 'nav.inc';
     <div class="job_search">
         <form method="get" action="jobs.php">
            <label class="search-label" for="search">Search available positions:</label>
-           <input type="text" id="search" name="search" placeholder="Enter a job title or keyword..."
+           <input class="search-input" type="text" id="search" name="search" placeholder="Enter a job title or keyword..."
               value="<?php echo htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
            <button type="submit">Search</button>
             <a href="jobs.php">Clear search</a>
