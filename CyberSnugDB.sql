@@ -132,8 +132,8 @@ INSERT INTO `member_contributions` (`contribution_id`, `member_id`, `project_id`
 (42, 3, 2, 'Completed task 6', 2),
 (43, 3, 2, 'Assisted in task 2 (basic code setup)', 3),
 (44, 4, 2, 'Completed part of task 5 (jobs table + render code & css styling)', 2),
-(45, 3, 2, 'Assisted in task 5 (search bar)'),
-(46, 1, 2, 'Assisted in task 6 (css styling and added staff login page to nav bar)');
+(45, 3, 2, 'Assisted in task 5 (search bar)', 4),
+(46, 1, 2, 'Assisted in task 6 (css styling and added staff login page to nav bar)', 5);
 
 -- --------------------------------------------------------
 
