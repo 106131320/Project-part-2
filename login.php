@@ -1,7 +1,18 @@
 <?php
 session_start();
+
+// already logged in? skip the form and go straight to the manage page
+if (!empty($_SESSION['user'])) {
+    header("Location: manage.php");
+    exit;
+}
+
 require_once 'settings.php'; // Includes the DB connection $conn
 
+// shown after logout.php redirects here
+if (isset($_GET['loggedout'])) {
+    $message = "You have been logged out.";
+}
 
 // --- HANDLE LOGIN ---
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -15,44 +26,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($result && password_verify($password, $result['password'])) {
         $_SESSION['user'] = $username;
-        header("Location: manage.php"); 
+        header("Location: manage.php");
         exit;
     } else {
         $error = "Invalid username or password!";
     }
+}
+$conn->close();
 
-$conn->close();}
+// shared layout: <head>, then site header/navigation
+$page_title = 'Staff Login';
+$page_description = 'Cyber Snug staff login';
+$page_keywords = 'Cyber Snug, staff login';
+$body_id = 'login';
+require_once 'header.inc';
+require_once 'nav.inc';
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Login</title>
-    <link rel="stylesheet" href="styles/styles.css">
-</head>
-
-<body id="login">
+  <main class="login-main">
     <div class="login-container">
-        <h2>Admin Login</h2>
+      <h2>Staff Login</h2>
 
-        <?php if (!empty($message)): ?>
-            <div class="success-message"><?= $message ?></div>
-        <?php endif; ?>
+      <?php if (!empty($message)): ?>
+        <div class="success-message"><?= htmlspecialchars($message) ?></div>
+      <?php endif; ?>
 
-        <?php if (!empty($error)): ?>
-            <div class="error-message"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
+      <?php if (!empty($error)): ?>
+        <div class="error-message"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
 
-        <form method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+      <form method="post" action="login.php">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" required autofocus>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
 
-        <a href="index.php">← Return to homepage</a>
+      <a href="index.php">&larr; Return to homepage</a>
     </div>
-</body>
+  </main>
 
-</html>
+<?php require_once 'footer.inc'; ?>

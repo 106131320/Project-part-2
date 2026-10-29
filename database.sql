@@ -126,12 +126,14 @@ INSERT INTO `member_contributions` (`contribution_id`, `member_id`, `project_id`
 (36, 2, 2, 'Unable to contribute', 1),
 (37, 3, 2, 'Completed task 4', 1),
 (38, 4, 2, 'Completed task 3', 1),
-(39, 1, 2, 'Finalised task 2', 2),
+(39, 1, 2, 'Finalised task 2 (Rewrote to follow lecture template and added error_log())', 2),
 (40, 1, 2, 'Completed task 7', 3),
 (41, 1, 2, 'Managed the presentation', 4),
-(42, 3, 2, 'Partially completed task 6', 2),
-(43, 3, 2, 'Assisted in task 2', 3),
-(44, 4, 2, 'Completed task 5', 2);
+(42, 3, 2, 'Completed task 6', 2),
+(43, 3, 2, 'Assisted in task 2 (basic code setup)', 3),
+(44, 4, 2, 'Completed part of task 5 (jobs table + render code & css styling)', 2),
+(45, 3, 2, 'Assisted in task 5 (search bar)'),
+(46, 1, 2, 'Assisted in task 6 (css styling and added staff login page to nav bar)');
 
 -- --------------------------------------------------------
 

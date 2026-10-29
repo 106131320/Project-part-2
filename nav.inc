@@ -14,6 +14,9 @@
       <li><a href="./jobs.php">Available Jobs</a></li>
       <li><a href="./apply.php">Application Form</a></li>
       <li><a href="./about.php">About Us</a></li>
+            <li><a href="./about.php">About Us</a></li>
+      <!-- staff-only area: highlighted while on login.php or manage.php -->
+      <li><a href="./login.php"<?php echo in_array(basename($_SERVER['SCRIPT_NAME']), ['login.php', 'manage.php']) ? ' class="active" aria-current="page"' : ''; ?>>Staff Login</a></li>
     </ul>
   </nav>
 </header>

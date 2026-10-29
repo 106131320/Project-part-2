@@ -23,7 +23,6 @@ if (isset($_POST['update_status'])) {
     $stmt = $conn->prepare("UPDATE eoi SET status=? WHERE eoi_id=?");
     $stmt->bind_param("si", $newStatus, $eoiid);
     $stmt->execute();
-    $stmt->execute();
 }
 
 // Sorting
@@ -76,74 +75,93 @@ if (!$stmt->execute()) {
 
 $result = $stmt->get_result();
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Manage EOIs</title>
-    <link rel="stylesheet" href="styles/project.css" type="text/css">
+<?php
+$page_title = 'Manage EOIs';
+$page_description = 'Cyber Snug staff area - manage expressions of interest';
+$page_keywords = 'Cyber Snug, manage, EOI';
+$body_id = 'manage';
+require_once 'header.inc';
+require_once 'nav.inc';
+?>
 
-</head>
+  <main class="manage-main">
+    <div class="manage-header">
+      <h1>EOI Management</h1>
+      <div class="manage-user">
+        <span>Welcome, <strong><?= htmlspecialchars($_SESSION['user']); ?></strong></span>
+        <a class="logout-button" href="logout.php">Logout</a>
+      </div>
+    </div>
 
-<body>
-    <h1>EOI Management (Welcome <?= $_SESSION['user']; ?>)</h1>
-
-    <h2>All EOIs</h2>
-    <table border="1">
-        <tr>
-            <th>EOI ID</th>
-            <th>Job Ref</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()): ?>
+    <section class="manage-section">
+      <h2>All EOIs</h2>
+      <div class="table-wrap">
+        <table class="manage-table">
+          <thead>
             <tr>
-                <td><?= $row['eoi_id']; ?></td>
-                <td><?= $row['job_ref']; ?></td>
-                <td><?= $row['first_name'] . " " . $row['last_name']; ?></td>
-                <td><?= $row['email']; ?></td>
-                <td><?= $row['status']; ?></td>
-                <td>
-                    <form method="post" style="display:inline">
-                        <input type="hidden" name="eoi_id" value="<?= $row['eoi_id']; ?>">
-                        <select name="status">
-                            <option value="New" <?= ($row['status'] == 'New') ? 'selected' : ''; ?>>New</option>
-                            <option value="Current" <?= ($row['status'] == 'Current') ? 'selected' : ''; ?>>Current</option>
-                            <option value="Final" <?= ($row['status'] == 'Final') ? 'selected' : ''; ?>>Final</option>
-                        </select>
-                        <button type="submit" name="update_status">Update</button>
-                    </form>
-                </td>
+              <th>EOI ID</th>
+              <th>Job Ref</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-        <?php endwhile; ?>
-    </table>
+          </thead>
+          <tbody>
+            <?php while ($row = $result->fetch_assoc()): ?>
+              <tr>
+                <td><?= htmlspecialchars($row['eoi_id']); ?></td>
+                <td><?= htmlspecialchars($row['job_ref']); ?></td>
+                <td><?= htmlspecialchars($row['first_name'] . " " . $row['last_name']); ?></td>
+                <td><?= htmlspecialchars($row['email']); ?></td>
+                <td><?= htmlspecialchars($row['status']); ?></td>
+                <td>
+                  <form method="post" class="status-form">
+                    <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['eoi_id']); ?>">
+                    <select name="status">
+                      <option value="New" <?= ($row['status'] == 'New') ? 'selected' : ''; ?>>New</option>
+                      <option value="Current" <?= ($row['status'] == 'Current') ? 'selected' : ''; ?>>Current</option>
+                      <option value="Final" <?= ($row['status'] == 'Final') ? 'selected' : ''; ?>>Final</option>
+                    </select>
+                    <button type="submit" name="update_status">Update</button>
+                  </form>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    <h2>Search EOIs</h2>
-    <form method="get" class="manage">
-        Job Reference: <input type="text" name="job_ref">
-        First Name: <input type="text" name="first_name">
-        Last Name: <input type="text" name="last_name">
-        <label>Sort by:</label>
-        <select name="sort">
+    <section class="manage-section">
+      <h2>Search EOIs</h2>
+      <form method="get" class="manage">
+        <label>Job Reference: <input type="text" name="job_ref"></label>
+        <label>First Name: <input type="text" name="first_name"></label>
+        <label>Last Name: <input type="text" name="last_name"></label>
+        <label>Sort by:
+          <select name="sort">
             <option value="first_name">First Name</option>
             <option value="last_name">Last Name</option>
             <option value="job_ref">Job Reference</option>
             <option value="status">Status</option>
-        </select>
+          </select>
+        </label>
         <button type="submit">Filter/Sort</button>
-    </form>
+      </form>
+    </section>
 
-    <h2>Delete EOIs</h2>
-    <form method="post" class="manage">
+    <section class="manage-section">
+      <h2>Delete EOIs</h2>
+      <form method="post" class="manage">
         <input type="text" name="job_ref" required placeholder="Job Ref">
-        <button type="submit" name="delete_by_job">Delete by Job Ref</button>
-    </form>
-    <a href="logout.php">Logout</a>
-</body>
+        <button type="submit" name="delete_by_job" class="danger-button">Delete by Job Ref</button>
+      </form>
+    </section>
+  </main>
 
-</html>
+<?php require_once 'footer.inc'; ?>
 <?php
 $conn->close();
 ?>
