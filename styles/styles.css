@@ -1070,7 +1070,7 @@ form.manage button {
   }
 }
 
-/* --- Nav on small screens: let the tabs wrap so Staff Login stays visible --- */
+/* Nav on small screens: let the tabs wrap so Staff Login stays visible */
 @media (max-width: 700px) {
   nav {
     padding: 0 10px;
@@ -1086,4 +1086,10 @@ form.manage button {
     font-size: 1.1rem;
     padding: 8px 10px;
   }
+}
+
+/* footer stays at the bottom on the login and manage pages */
+body#login,
+body#manage {
+  min-height: 100vh;
 }
