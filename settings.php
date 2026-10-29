@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root"; // These credentials are simply for accenessing the pages, they do not need a password. These are not the credentials used to log in. 
 $pwd = "";
-$sql_db = "database";
+$sql_db = "CyberSnugDB";
 
 // Establish database connection
 mysqli_report(MYSQLI_REPORT_OFF);
